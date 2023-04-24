@@ -37,19 +37,18 @@ class HomeScreen extends StatelessWidget {
                   'Counter value: ',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                BlocListener<CounterBloc, CounterState>(
+                BlocConsumer<CounterBloc, CounterState>(
                   listener: (context, state) {
                     showSnackBar(context, state is IncrementState);
                   },
-                  child: BlocBuilder<CounterBloc, CounterState>(
-                    builder: (context, state) {
+                  builder: (context, state) {
                       return Text(
                         '${state.counterValue}',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       );
                     },
-                  ),
+                  
                 ),
               ],
             ),
