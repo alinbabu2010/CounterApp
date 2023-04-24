@@ -8,12 +8,12 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   CounterBloc() : super(CounterInitial()) {
 
     on<CounterIncrementEvent>((event, emit) {
-      emit(CounterState(state.counterValue + 1));
+      emit(IncrementState(state.counterValue + 1));
     });
 
 
     on<CounterDecrementEvent>((event, emit) {
-      emit(CounterState(state.counterValue - 1));
+      emit(DecrementState(state.counterValue - 1));
     });
 
   }
