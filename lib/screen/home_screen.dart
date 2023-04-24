@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../bloc/bloc_impots.dart';
+import '../bloc/bloc_imports.dart';
 
 class HomeScreen extends StatelessWidget {
-
   const HomeScreen({Key? key}) : super(key: key);
 
   void showSnackBar(BuildContext context, bool isIncrement) {
     var snackContent = "";
     if (isIncrement) {
-      snackContent = "Sucessfully incremented";
+      snackContent = "Successfully incremented";
     } else {
-      snackContent = "Sucessfully decremented";
+      snackContent = "Successfully decremented";
     }
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(snackContent),
@@ -42,13 +41,12 @@ class HomeScreen extends StatelessWidget {
                     showSnackBar(context, state is IncrementState);
                   },
                   builder: (context, state) {
-                      return Text(
-                        '${state.counterValue}',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      );
-                    },
-                  
+                    return Text(
+                      '${state.counterValue}',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    );
+                  },
                 ),
               ],
             ),
