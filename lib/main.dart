@@ -1,9 +1,11 @@
+import 'package:counter_app_bloc/bloc/app_bloc_observer.dart';
 import 'package:counter_app_bloc/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'bloc/bloc_impots.dart';
 
 void main() {
+  Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }
 
