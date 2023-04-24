@@ -12,6 +12,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int counterValue = 0;
 
+  void showSnackBar(BuildContext context, bool isIncrement) {
+    var snackContent = "";
+    if (isIncrement) {
+      snackContent = "Sucessfully incremented";
+    } else {
+      snackContent = "Sucessfully decremented";
+    }
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(snackContent),
+      duration: Duration(milliseconds: 300),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     print('Whole \'HomeScreen\' built');
@@ -30,14 +43,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Counter value: ',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                BlocBuilder<CounterBloc, CounterState>(
-                  builder: (context, state) {
-                    return Text(
-                      '${state.counterValue}',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    );
+                BlocListener<CounterBloc, CounterState>(
+                  listener: (context, state) {
+                    showSnackBar(context, state is IncrementState);
                   },
+                  child: BlocBuilder<CounterBloc, CounterState>(
+                    builder: (context, state) {
+                      return Text(
+                        '${state.counterValue}',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
