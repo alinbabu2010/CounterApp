@@ -15,3 +15,11 @@ class CounterState {
 class CounterInitial extends CounterState {
   CounterInitial() : super(0);
 }
+
+class IncrementState extends CounterState {
+  IncrementState(int counterValue) : super(counterValue);
+}
+
+class DecrementState extends CounterState {
+  DecrementState(int counterValue) : super(counterValue);
+}
