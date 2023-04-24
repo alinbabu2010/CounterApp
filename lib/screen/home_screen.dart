@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../bloc/bloc_impots.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -9,18 +11,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int counterValue = 0;
-
-  void increaseNumber() {
-    setState(() {
-      counterValue++;
-    });
-  }
-
-  void decreaseNumber() {
-    setState(() {
-      counterValue--;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +23,23 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: Center(
-                  child: Text(
-                'Counter value: $counterValue',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Counter value: ',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                BlocBuilder<CounterBloc, CounterState>(
+                  builder: (context, state) {
+                    return Text(
+                      '${state.counterValue}',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    );
+                  },
+                ),
+              ],
             ),
             SizedBox(
               height: 20,
@@ -50,7 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () => decreaseNumber(),
+                      onPressed: () => context
+                          .read<CounterBloc>()
+                          .add(CounterDecrementEvent()),
                       icon: Icon(Icons.remove),
                       label: Text('Decrease'),
                     ),
@@ -60,7 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () => increaseNumber(),
+                      onPressed: () => context
+                          .read<CounterBloc>()
+                          .add(CounterIncrementEvent()),
                       icon: Icon(Icons.add),
                       label: Text('Increase'),
                     ),
