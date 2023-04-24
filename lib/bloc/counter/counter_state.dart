@@ -10,6 +10,18 @@ class CounterState {
   String toString() {
     return "CounterState($counterValue)";
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'counterValue': this.counterValue,
+    };
+  }
+
+  factory CounterState.fromMap(Map<String, dynamic> map) {
+    return CounterState(
+      map['counterValue'] as int,
+    );
+  }
 }
 
 class CounterInitial extends CounterState {
