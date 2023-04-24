@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../bloc/bloc_impots.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
+
   const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int counterValue = 0;
 
   void showSnackBar(BuildContext context, bool isIncrement) {
     var snackContent = "";
